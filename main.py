@@ -21,12 +21,15 @@ class VaporwaveCreator:
 			for filename in [f for f in filenames if (f.endswith('.wav'))]:
 				snippets.append(filename)
 		i = 1
-		copyfile("temp/" + random.choice(snippets),"vaporwave.wav")
+		piece = random.choice(snippets)
+		copyfile("temp/" + piece,"vaporwave.wav")
 		while i < 100:
-			os.system('sox --combine concatenate vaporwave.wav ' + "temp/" + random.choice(snippets) + " vaporwave2.wav")
+			if (random.randint(0,2) == 1): piece = random.choice(snippets)
+			os.system('sox --combine concatenate vaporwave.wav ' + "temp/" + piece + " vaporwave2.wav")
 			os.remove("vaporwave.wav")
 			copyfile("vaporwave2.wav","vaporwave.wav")
 			os.remove("vaporwave2.wav")
+			#sleep(1)
 			i += 1
 
 if __name__ == "__main__":
