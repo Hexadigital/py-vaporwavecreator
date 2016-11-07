@@ -24,12 +24,12 @@ class VaporwaveCreator:
 		piece = random.choice(snippets)
 		copyfile("temp/" + piece,"vaporwave.wav")
 		while i < 100:
-			if (random.randint(0,2) == 1): piece = random.choice(snippets)
+			if (random.randint(0,5) == 1): piece = random.choice(snippets)
 			os.system('sox --combine concatenate vaporwave.wav ' + "temp/" + piece + " vaporwave2.wav")
 			os.remove("vaporwave.wav")
 			copyfile("vaporwave2.wav","vaporwave.wav")
 			os.remove("vaporwave2.wav")
-			#sleep(1)
+			sleep(.1)
 			i += 1
 
 if __name__ == "__main__":
