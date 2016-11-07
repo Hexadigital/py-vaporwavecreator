@@ -24,4 +24,4 @@ if __name__ == "__main__":
 		vw = VaporwaveCreator(filename, bpm)
 		vw.split()
 	else:
-		print("This script requires the input file name as an argument if run directly.")
+		print("TRY: main.py FILENAME BPM")
