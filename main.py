@@ -23,14 +23,25 @@ class VaporwaveCreator:
 		i = 1
 		piece = random.choice(snippets)
 		copyfile("temp/" + piece,"vaporwave.wav")
+		measures = [2,4,8]
 		while i < 100:
-			if (random.randint(0,5) == 1): piece = random.choice(snippets)
-			os.system('sox --combine concatenate vaporwave.wav ' + "temp/" + piece + " vaporwave2.wav")
-			os.remove("vaporwave.wav")
-			copyfile("vaporwave2.wav","vaporwave.wav")
-			os.remove("vaporwave2.wav")
-			sleep(.1)
-			i += 1
+			piece = random.choice(snippets)
+			times = random.choice(measures)
+			for x in range(0,times):
+				os.system('sox --combine concatenate vaporwave.wav ' + "temp/" + piece + " vaporwave2.wav")
+				os.remove("vaporwave.wav")
+				copyfile("vaporwave2.wav","vaporwave.wav")
+				os.remove("vaporwave2.wav")
+				sleep(.1)
+				i += 1
+	
+	def finalize(self):
+		slowdown = (random.uniform(0.5,0.7))
+		print(slowdown)
+		os.system("sox vaporwave.wav vaporwave2.wav speed " + str(slowdown))
+		os.remove("vaporwave.wav")
+		copyfile("vaporwave2.wav","vaporwave.wav")
+		os.remove("vaporwave2.wav")
 
 if __name__ == "__main__":
 	if len(sys.argv) > 2:
@@ -43,5 +54,6 @@ if __name__ == "__main__":
 		vw = VaporwaveCreator(filename, bpm)
 		vw.split()
 		vw.rejoin()
+		vw.finalize()
 	else:
 		print("TRY: main.py FILENAME BPM")
