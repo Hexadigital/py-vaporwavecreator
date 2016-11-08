@@ -28,7 +28,7 @@ class VaporwaveCreator:
 			piece = random.choice(snippets)
 			times = random.choice(measures)
 			for x in range(0,times):
-				os.system('sox --norm --combine concatenate vaporwave.wav ' + "temp/" + piece + " vaporwave2.wav")
+				os.system('sox --combine concatenate vaporwave.wav ' + "temp/" + piece + " vaporwave2.wav")
 				os.remove("vaporwave.wav")
 				copyfile("vaporwave2.wav","vaporwave.wav")
 				os.remove("vaporwave2.wav")
