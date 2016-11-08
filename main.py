@@ -36,12 +36,22 @@ class VaporwaveCreator:
 				i += 1
 	
 	def finalize(self):
-		slowdown = (random.uniform(0.5,0.7))
+		slowdown = (random.uniform(0.4,0.6))
 		print(slowdown)
 		os.system("sox vaporwave.wav vaporwave2.wav speed " + str(slowdown))
 		os.remove("vaporwave.wav")
 		copyfile("vaporwave2.wav","vaporwave.wav")
 		os.remove("vaporwave2.wav")
+		padding = str(random.uniform(1,4)) + " " + str(random.uniform(1,4))
+		os.system("sox vaporwave.wav vaporwave2.wav gain -3 pad " + padding + " reverb 85")
+		os.remove("vaporwave.wav")
+		copyfile("vaporwave2.wav","vaporwave.wav")
+		os.remove("vaporwave2.wav")
+		os.system("sox vaporwave.wav vaporwave2.wav gain -3 pad " + padding + " phaser 0.9 0.85 4 0.23 1.3 -s")
+		os.remove("vaporwave.wav")
+		copyfile("vaporwave2.wav","vaporwave.wav")
+		os.remove("vaporwave2.wav")
+
 
 if __name__ == "__main__":
 	if len(sys.argv) > 2:
