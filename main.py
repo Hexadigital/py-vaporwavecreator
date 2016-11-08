@@ -7,7 +7,7 @@ class VaporwaveCreator:
 		if os.path.isfile(filename):
 			self._filename = filename
 			self._bpm = bpm
-			self._measuretime = (60/bpm)
+			self._measuretime = (60/bpm)*4
 		else:
 			raise IOError("The file specified could not be found.")
 	
@@ -28,7 +28,7 @@ class VaporwaveCreator:
 			piece = random.choice(snippets)
 			times = random.choice(measures)
 			for x in range(0,times):
-				os.system('sox --combine concatenate vaporwave.wav ' + "temp/" + piece + " vaporwave2.wav")
+				os.system('sox --norm --combine concatenate vaporwave.wav ' + "temp/" + piece + " vaporwave2.wav")
 				os.remove("vaporwave.wav")
 				copyfile("vaporwave2.wav","vaporwave.wav")
 				os.remove("vaporwave2.wav")
@@ -38,19 +38,22 @@ class VaporwaveCreator:
 	def finalize(self):
 		slowdown = (random.uniform(0.4,0.6))
 		print(slowdown)
-		os.system("sox vaporwave.wav vaporwave2.wav speed " + str(slowdown))
+		os.system("sox --norm vaporwave.wav vaporwave2.wav speed " + str(slowdown))
 		os.remove("vaporwave.wav")
 		copyfile("vaporwave2.wav","vaporwave.wav")
 		os.remove("vaporwave2.wav")
 		padding = str(random.uniform(1,4)) + " " + str(random.uniform(1,4))
-		os.system("sox vaporwave.wav vaporwave2.wav gain -3 pad " + padding + " reverb 85")
+		os.system("sox --norm vaporwave.wav vaporwave2.wav pad " + padding + " reverb 85")
 		os.remove("vaporwave.wav")
 		copyfile("vaporwave2.wav","vaporwave.wav")
 		os.remove("vaporwave2.wav")
-		os.system("sox vaporwave.wav vaporwave2.wav gain -3 pad " + padding + " phaser 0.9 0.85 4 0.23 1.3 -s")
+		os.system("sox --norm vaporwave.wav vaporwave2.wav phaser 0.9 0.85 4 0.23 1.3 -s")
 		os.remove("vaporwave.wav")
 		copyfile("vaporwave2.wav","vaporwave.wav")
 		os.remove("vaporwave2.wav")
+		for root, folders, filenames in os.walk('temp/'):
+			for filename in [f for f in filenames if (f.endswith('.wav'))]:
+				os.remove('temp/'+filename)
 
 
 if __name__ == "__main__":
