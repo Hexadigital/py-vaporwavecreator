@@ -1,6 +1,16 @@
 # py-vaporwavecreator
 A Python script to automatically create "vaporwave" from an imported audio file
 
-Placeholder notes:
-Split audio file by parts of (60/BPM)*4
-sox target.file temp/temp.flac trim 0 num : newfile : repeat
+Requires sox.
+
+Can be run with "python main.py targetfile.format BPM".
+
+
+
+TODO:
+
+Fix clipping in some cases.
+
+Smooth out transitions (adjust reverb?)
+
+More variability for lengths/patterns
