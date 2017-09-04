@@ -8,8 +8,8 @@ class VaporwaveCreator:
 			self._filename = filename
 			self._bpm = bpm
 			self._measuretime = (60/bpm)*4
-		        if not os.path.isdir('temp/'):
-			        os.mkdir('temp/')
+			if not os.path.isdir('temp/'):
+				os.mkdir('temp/')
 		else:
 			raise IOError("The file specified could not be found.")
 	
